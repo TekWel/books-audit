@@ -19,24 +19,37 @@ Done: folder, notes   Now: QuickBooks   Next: mail, bank statements, first run
 
 ## Step 1 of 6: the folder
 
-Explain: the audit keeps everything in one folder, so it can show its evidence and save its results.
+Explain: the audit keeps everything in one folder, so it can show its evidence and save its results. Most teams keep it in SharePoint or OneDrive, synced to each person's computer, so everyone sees the same files and results.
 
-Ask which fits:
+If no folder is connected, lead with the sync. Ask: "Is your books audit folder in SharePoint or OneDrive? If so, paste its link, or tell me where it is, and I'll walk you through syncing it." Also ask whether they're on Windows or a Mac.
 
-1. **"We already have a books audit folder."** Ask them to connect it. In the Claude desktop app that's the folder button where they start a task; in Claude Code it's opening Claude in that folder. Once it's connected, check it against the layout in `folder-setup.md`.
-2. **"It's in SharePoint or OneDrive."** Syncing is the best way, because the audit then reads every file directly and its results land back in SharePoint on their own. Walk them through it one action at a time:
-   1. Open the folder in SharePoint in the browser.
-   2. Click **Sync** (or **Add shortcut to My files**, then open OneDrive on the computer).
-   3. Wait until the folder shows up in File Explorer or Finder, usually under the company's name.
-   4. Connect that local folder in Claude.
+### Syncing it from SharePoint or OneDrive
 
-   If they can't sync (for example, on a computer without OneDrive) and a Microsoft 365 or SharePoint connector is connected in Claude, offer to work from SharePoint through the connector instead:
-   - It's read-only, and reading through a connector is slower for a full month of files.
-   - The results can't be saved back to SharePoint that way. Save them in a local folder they connect, and ask them to upload that folder into `Results`.
-   - Say so in the summary.
-3. **"Start a new one."** Ask where it should live. Suggest a shared, synced location over a personal folder, because it holds bank statements and accounting data and others may need it. Once they've connected the empty folder, create the layout from `folder-setup.md`.
+This is the best way: the audit reads every file directly from the computer, and its results go back to SharePoint on their own. Give one action per message and wait for "done":
 
-If the connected folder is missing some subfolders, list them and offer to create them.
+1. Open the link in the browser and sign in with the work account.
+2. Choose how much to sync:
+   - **Just this folder:** click **Add shortcut to My files** in the toolbar, or in the folder's **...** menu. This is usually what they want.
+   - **The whole library:** click **Sync** in the toolbar.
+3. Find the synced folder:
+   - **Windows:** in File Explorer, under **OneDrive - <company>** (for a shortcut) or under the company's name (for a synced library). The first sync can take a few minutes.
+   - **Mac:** the OneDrive app must be installed and signed in. Then look in Finder's sidebar under **OneDrive - <company>**.
+   - If the folder doesn't appear, have them click the OneDrive cloud icon (Windows taskbar or Mac menu bar) and check that it's signed in and syncing.
+4. In Claude, connect that folder (the folder button where they start a task).
+
+Once it's connected, check:
+
+- The path is inside OneDrive or the company's synced folder. If it's somewhere like Downloads or the desktop, it's probably a copy: say that results saved there won't reach anyone else, and offer to start step 1 again.
+- The folder matches the layout in `folder-setup.md`. If subfolders are missing, list them and offer to create them.
+
+### Other cases
+
+- **"We already have a books audit folder on this computer."** Ask them to connect it, then make the same checks.
+- **"We don't have one yet."** Suggest creating it in SharePoint, not in a personal folder, because it holds bank statements and accounting data and others will need it. Have them create it there and limit access to the people who keep the books and run IT, then sync it as above. Once it's connected, create the layout.
+- **"I can't sync on this computer,"** and a Microsoft 365 or SharePoint connector is connected in Claude: offer to work from SharePoint through the connector instead.
+  - It's read-only, and reading a full month of files through a connector is slower.
+  - The results can't be saved back to SharePoint that way. Save them in a local folder they connect, and ask them to upload that folder into `Results`.
+  - Say so in the summary.
 
 ## Step 2 of 6: company notes
 
