@@ -44,24 +44,40 @@ Each export writes these CSV files, with a header row, plus `export-info.json`:
 
 | File | One row per | Columns the skill relies on |
 |---|---|---|
-| `bills.csv` | bill | id, doc_number, txn_date, due_date, vendor, total, balance, ap_account, memo, attachment_count |
+Records, one row each, with QuickBooks's own ids so rows can be linked:
+
+| File | One row per | Columns the skill relies on |
+|---|---|---|
+| `bills.csv` | bill | id, doc_number, txn_date, due_date, vendor, total, balance, ap_account, memo |
 | `bill_payments.csv` | bill payment | id, txn_date, vendor, total, pay_type, bank_account, doc_number, linked_bills (`billId:amount;...`) |
 | `vendor_credits.csv` | vendor credit | id, doc_number, txn_date, vendor, total, balance |
-| `purchases.csv` | expense, check or card charge | id, txn_date, payee, payment_account, total, expense_accounts, doc_number, memo |
-| `deposits.csv` | deposit | id, txn_date, deposit_account, total, lines (`payer:amount:linked txn;...`) |
-| `payments.csv` | customer payment | id, txn_date, customer, total, deposit_account, linked_invoices (`invoiceId:amount;...`), unapplied |
+| `purchases.csv` | expense, check or card charge | id, txn_date, payee, payment_account, payment_type, total, expense_accounts, doc_number, memo |
+| `deposits.csv` | deposit | id, txn_date, deposit_account, total, lines (`payer:amount:linked txn;...`), memo |
+| `payments.csv` | customer payment | id, txn_date, customer, total, deposit_account, linked_invoices (`invoiceId:amount;...`), unapplied, reference |
 | `invoices.csv` | invoice | id, doc_number, txn_date, due_date, customer, total, balance, customer_po, ship_date, email_status |
 | `credit_memos.csv` | credit memo | id, doc_number, txn_date, customer, total, balance |
 | `journal_entries.csv` | journal entry line | id, doc_number, txn_date, account, debit, credit, name, memo |
-| `transfers.csv` | transfer | id, txn_date, from_account, to_account, amount |
-| `accounts.csv`, `vendors.csv`, `customers.csv`, `items.csv` | list entry | id, name, type, active, balance where it applies |
-| `general_ledger.csv` | ledger line | date, type, number, name, account, memo, debit, credit, balance |
-| `transaction_list.csv` | transaction | date, type, number, name, account, amount, cleared (`C` cleared, `R` reconciled, blank) |
-| `trial_balance.csv`, `balance_sheet.csv`, `profit_and_loss.csv` | report line | account, amount (or debit and credit) |
-| `vendor_balance_detail.csv`, `ap_aging_detail.csv` | open item | vendor, date, type, number, due_date, amount, open_balance |
-| `customer_balance_detail.csv`, `ar_aging_detail.csv` | open item | customer, date, type, number, due_date, amount, open_balance |
+| `transfers.csv` | transfer | id, txn_date, from_account, to_account, amount, memo |
+| `accounts.csv` | account | id, name, type, subtype, active, balance |
+| `vendors.csv`, `customers.csv` | vendor or customer | id, name, company, active, balance, email |
+| `items.csv` | product or service | id, name, type, active, unit_price, qty_on_hand |
 
-`export-info.json` records `exported_at`, the company name, `period_start` and `period_end`, each file's row count, and any errors. If it lists errors, say so before using that export.
+Reports, flattened. Every report row has `kind` (`data`, or `total` for a subtotal line), `txn_id` (the QuickBooks id of the transaction on a data row, which links to the record files), and a grouping column taken from the report's headings:
+
+| File | Grouping column | Other columns |
+|---|---|---|
+| `general_ledger.csv` | account | date, type, number, name, memo, split, amount, balance |
+| `transaction_list.csv` | section | date, type, number, name, memo, account, cleared (`C` cleared, `R` reconciled, blank), amount |
+| `trial_balance.csv` | section | account, debit, credit |
+| `balance_sheet.csv`, `profit_and_loss.csv` | section | account, total |
+| `vendor_balance_detail.csv` | vendor | date, type, number, due_date, amount, open_balance, balance |
+| `ap_aging_detail.csv` | aging_bucket | date, type, number, vendor, due_date, past_due, amount, open_balance |
+| `customer_balance_detail.csv` | customer | date, type, number, due_date, amount, open_balance, balance |
+| `ar_aging_detail.csv` | aging_bucket | date, type, number, customer, due_date, amount, open_balance |
+
+The balance and aging reports are as of the export date; the others cover `period_start` to `period_end`.
+
+`export-info.json` records `format_version`, `exported_at`, the company name, `period_start` and `period_end`, each file's row count, and any errors. If it lists errors, say so before using that export.
 
 Extra columns are fine; the skill ignores what it doesn't need. Amounts are in the company's home currency unless a currency column says otherwise.
 
