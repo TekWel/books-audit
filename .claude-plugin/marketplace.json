@@ -1,0 +1,14 @@
+{
+  "name": "books-audit",
+  "description": "Read-only books audit for small businesses on QuickBooks Online",
+  "owner": {
+    "name": "Alec Welwood"
+  },
+  "plugins": [
+    {
+      "name": "books-audit",
+      "source": "./plugins/books-audit",
+      "description": "Compare QuickBooks Online exports, bank statements and invoice and payment emails, and list every disagreement with its evidence"
+    }
+  ]
+}
