@@ -28,6 +28,8 @@ Every run produces `exceptions.xlsx` (one row per problem, with evidence and a s
 
 ## Set up the audit folder
 
+The first time, ask Claude to "set up the books audit". A step-by-step wizard connects or creates the folder, writes the company notes from your answers, and walks you through getting the QuickBooks reports, the mail and the bank statements in place, one step at a time.
+
 The skill works from one folder holding the company notes, the QuickBooks export, the mail export, the bank statements and the results. The layout, the file formats, and how to fill it automatically or by hand are in [folder-setup.md](plugins/books-audit/skills/books-audit/references/folder-setup.md). Start the company notes from [the template](plugins/books-audit/skills/books-audit/templates/company-notes.md).
 
 Keep the folder limited to the people who keep the books and run IT. It holds bank statements and accounting data.

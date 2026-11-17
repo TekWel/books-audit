@@ -1,6 +1,6 @@
 ---
 name: books-audit
-description: Audit a small business's books by comparing QuickBooks Online exports, bank statements, and the invoices and payment confirmations in its email, then list every disagreement with its evidence. Use when asked to audit or check the books, run the monthly books check, find missing or duplicate bills, match payments to the bank, explain a vendor statement balance, or check whether customer payments arrived.
+description: Audit a small business's books by comparing QuickBooks Online exports, bank statements, and the invoices and payment confirmations in its email, then list every disagreement with its evidence. Includes a step-by-step setup wizard for the first run. Use when asked to set up the books audit, audit or check the books, run the monthly books check, find missing or duplicate bills, match payments to the bank, explain a vendor statement balance, or check whether customer payments arrived.
 ---
 
 # Books audit
@@ -19,17 +19,15 @@ Compare a company's QuickBooks Online books with its bank statements and with th
 
 ## Before you start
 
-1. **Find the audit folder.** The person names it, or it's the folder you're working in. The layout it should have is in `references/folder-setup.md`.
-2. **Read the company notes** (`company-notes.md` or `company-notes.docx` at the top of the folder). They name the bank accounts and their QuickBooks accounts, the mailboxes, the vendors and customers to check and their email senders, known issues, checks to skip, and the smallest amount worth flagging. If there are no notes, offer to start them from `templates/company-notes.md` and ask the person to fill the gaps before you go on.
-3. **Confirm the mode and period.**
+1. **Look only where you're pointed.** Work in the folder the person connected or named. Never search their computer for books files; if no folder is connected, ask.
+2. **Check what's in place** for the period: the folder and its layout (`references/folder-setup.md`), the company notes (`company-notes.md` or `.docx`), the QuickBooks export, the mail export and its coverage log, and one bank statement per account per month.
+3. **If anything is missing, run the setup wizard** in `references/setup-wizard.md`. It goes one step at a time, does what it can for the person, and starts at the first unfinished step. Don't answer with a list of everything that's missing.
+4. **Read the company notes.** They name the bank accounts and their QuickBooks accounts, the mailboxes, the vendors and customers to check and their email senders, known issues, checks to skip, and the smallest amount worth flagging.
+5. **Confirm the mode and period.**
    - *Monthly check:* one calendar month. Default to the last full month.
    - *Catch-up:* a date range, worked one month at a time.
-4. **Check the inputs cover the period,** and tell the person what's missing before you start:
-   - QuickBooks export: when it was taken and which dates it covers.
-   - Mail export: the coverage log should show every mailbox in the notes for every day of the period, with no errors.
-   - Bank statements: one per account per month.
 
-   Go ahead with what's there, and name every gap in the summary.
+If the person chooses to run with something still missing, go ahead with what's there and name every gap in the summary.
 
 ## The checks
 
