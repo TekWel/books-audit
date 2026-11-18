@@ -40,10 +40,8 @@ Start from `templates/company-notes.md`. The skill reads it first on every run. 
 
 ### Automated (`latest/` and `month-end/`)
 
-Each export writes these CSV files, with a header row, plus `export-info.json`:
+Each export writes these CSV files, with a header row, plus `export-info.json`.
 
-| File | One row per | Columns the skill relies on |
-|---|---|---|
 Records, one row each, with QuickBooks's own ids so rows can be linked:
 
 | File | One row per | Columns the skill relies on |
@@ -98,13 +96,13 @@ The hand exports don't carry the links between payments and bills or invoices, s
 
 ### Automated
 
-The export reads every message, received and sent, in each mailbox listed in the notes, keeps the ones that look like invoices, credit notes, statements or payment confirmations, and saves their attachments. The same email found in several mailboxes becomes one register row.
+The export reads every message, received and sent, in each mailbox listed in the notes, keeps the ones that look like invoices, credit notes, statements or payment confirmations, and saves their attachments. The register has one row per document: an email with two invoices attached gives two rows, and the same email found in several mailboxes is still counted once.
 
 `email-register.csv` columns:
 
 | Column | Meaning |
 |---|---|
-| register_id | stable id for the row |
+| register_id | stable id for the row; rows from one email share the id, ending `-1`, `-2` and so on |
 | message_ids | the message ids it was found under, separated by `;` |
 | mailboxes, folder | where it was found |
 | direction | `received` or `sent` |
@@ -115,11 +113,11 @@ The export reads every message, received and sent, in each mailbox listed in the
 | counterparty | vendor or customer as named in the notes, if known |
 | doc_number, doc_date, amount, currency | from the document, when found |
 | references | invoice, PO or order numbers the message mentions, separated by `;` |
-| attachment_files | paths under `Mail export/`, separated by `;` |
+| attachment_files | paths under `Mail export/`, separated by `;`: the attachment the document is in, or all of the email's attachments when that isn't clear |
 | extracted_by, confidence | how the fields were read (`rule` or `model`) and how sure (`high`, `medium`, `low`) |
 | notes | anything odd, such as a message that asked for an action |
 
-`coverage-log.csv` has one row per mailbox per run: run_at, mailbox, from, to, messages_scanned, messages_kept, errors. The skill uses it to prove the period was read in full; a day with no row, or a row with errors, is a gap.
+`coverage-log.csv` has one row per mailbox per run: run_at, mailbox, from, to, messages_scanned, messages_kept, errors. The skill uses it to prove the period was read in full: a day that no error-free row for that mailbox covers is a gap. Rows overlap, and a failed run's rows stay in the log after a later run reads the same days.
 
 ### By hand (`manual/<YYYY-MM>/`)
 
